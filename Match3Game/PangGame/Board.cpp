@@ -73,7 +73,6 @@ void Board::Init(TEXTURE_TYPE _BoardType, std::vector<std::vector<int>> _boardIn
 	assert(scene != nullptr);
 
 	m_Board.resize(m_iHeight, std::vector<Block*>(m_iWidth, nullptr));
-	m_arrColumnCount.resize(m_iWidth);
 
 	for (int y = 0; y < m_iHeight; ++y) // 보드세팅
 	{
@@ -102,8 +101,13 @@ void Board::Init(TEXTURE_TYPE _BoardType, std::vector<std::vector<int>> _boardIn
 				{
 					tmpBlock->Init({ x, y }, (TEXTURE_TYPE)GetRandomType(x, y), this, std::bind(&Board::BlockCheck, this, std::placeholders::_1));
 					dynamic_cast<BlockWall*>(tmpBlock)->InitWall((TEXTURE_TYPE)_boardInfo[y][x]);
+
+					Block* extraBlock = new Block();
+					extraBlock->Init({ 0,0 }, (TEXTURE_TYPE)GetRandomType(x, y), this, std::bind(&Board::BlockCheck, this, std::placeholders::_1));
+					m_sExtraBlock.push(extraBlock);
+					extraBlock->SetActivate(false);
+					scene->Scene::AddObject(extraBlock, OBJECT_GROUP::BLOCK);
 				}
-				
 			}
 			m_Board[y][x] = tmpBlock;
 		}
@@ -127,7 +131,7 @@ void Board::BoardReset()
 	}
 }
 
-// 유한상태기계패턴
+// FSM패턴
 void Board::Update()
 {
 	if (!IsReadyToUpdate()) // 업데이트가 불가능한 상태라면 리턴(스왑동작 처리중)
@@ -206,11 +210,11 @@ void Board::FailProcess()
 
 bool Board::DestroyingProcess()
 {
-	if (!CheckBoom())
+	if (!CheckBoom()) // 삭제된 블록들의 터지는 애니메이션 완료여부 체크
 		return true;
 
-	RemoveBlock();
-	m_eGameState = GAME_STATE::SETIING;
+	RemoveBlock(); // 애니메이션 완료됐으면 블록 삭제
+	m_eGameState = GAME_STATE::SETIING; // 상태변경
 	return false;
 }
 
@@ -555,37 +559,25 @@ bool Board::CheckMatch(Vector2 _position, TEXTURE_TYPE _type)
 		return false;
 }
 
-bool Board::isRemoveSpecial(Block* _block)
+// 매치확인 후, 스왑한 블록들 중 조건에 부합하면 해당블록을 특수블록으로 교체
+bool Board::isRemoveSpecial(Block* _block)	
 {
-	TEXTURE_TYPE type;
-	bool isSpecialBlock = false;
+	TEXTURE_TYPE type;	// 교체될 특수블록 타입
 
-	if (m_bMatch_5) // 우선순위 컬러->크로스->방향(방향은 어차피 모두 참일 수가 없음)
-	{
+	if (m_bMatch_5) // 우선순위 컬러->크로스->방향(COL과 ROW는 어차피 모두 참일 수가 없음)
 		type = REMOVE_COLOR_BLOCK;
-		isSpecialBlock = true;
-	}
 	else if (m_bMatchCross)
-	{
 		type = REMOVE_CROSS_BLOCK;
-		isSpecialBlock = true; //나중에수정
-	}
 	else if (m_bMatchCol_4)
-	{
 		type = REMOVE_COL_BLOCK;
-		isSpecialBlock = true;
-	}
 	else if (m_bMatchRow_4)
-	{
 		type = REMOVE_ROW_BLOCK;
-		isSpecialBlock = true; //나중에수정
-	}
 	else
 		return false;
 
-	m_vecScoreBoard[(int)_block->getBlockType()].HitTarget();
-	_block->SetTextureType(type);
-	return isSpecialBlock;
+	m_vecScoreBoard[(int)_block->getBlockType()].HitTarget(); // 미션블록적용
+	_block->SetTextureType(type);	// 특수블록으로 교체
+	return true;
 }
 
 bool Board::RowLineCheck(Vector2 _position, TEXTURE_TYPE _type)
@@ -594,9 +586,6 @@ bool Board::RowLineCheck(Vector2 _position, TEXTURE_TYPE _type)
 	int Leftx, Rightx; // 좌우 방향으로 가는 각각 x인덱스
 	for (Leftx = _position.m_ix - 1; Leftx >= 0; --Leftx) // 같은 타입이 나오는동안 왼쪽 탐색
 	{
-		// out of index 예외처리
-		if (Leftx < 0)
-			break;
 		// 다르면 루프 탈출
 		if (m_Board[_position.m_iy][Leftx] == nullptr || m_Board[_position.m_iy][Leftx]->getBlockType() != _type)
 			break;
@@ -606,9 +595,6 @@ bool Board::RowLineCheck(Vector2 _position, TEXTURE_TYPE _type)
 
 	for (Rightx = _position.m_ix + 1; Rightx < m_iWidth; ++Rightx) //오른쪽 탐색
 	{
-		// out of index 예외처리
-		if (Rightx >= m_iWidth)
-			break;
 		// 다르면 루프 탈출
 		if (m_Board[_position.m_iy][Rightx] == nullptr || m_Board[_position.m_iy][Rightx]->getBlockType() != _type)
 			break;
@@ -631,7 +617,6 @@ bool Board::RowLineCheck(Vector2 _position, TEXTURE_TYPE _type)
 		else if (iCount + 1 >= 4) // 5개는 실패하고 4개는 성공이라면 가로삭제블록 bool변수 True
 			m_bMatchRow_4 = true;
 		// 저 bool변수들은 삭제Process에서 특수블럭 생성에 사용됨
-
 		return true; // 3매치 성공 -> True반환
 	}
 	else
@@ -644,8 +629,7 @@ bool Board::ColLineCheck(Vector2 _position, TEXTURE_TYPE _type)
 	int up_y, down_y;
 	for (up_y = _position.m_iy - 1; up_y >= 0; --up_y)
 	{
-		if (up_y < 0)
-			break;
+		
 		if (m_Board[up_y][_position.m_ix] == nullptr || m_Board[up_y][_position.m_ix]->getBlockType() != _type)
 			break;
 		++iCount;
@@ -653,8 +637,7 @@ bool Board::ColLineCheck(Vector2 _position, TEXTURE_TYPE _type)
 
 	for (down_y = _position.m_iy + 1; down_y < m_iHeight; ++down_y)
 	{
-		if (down_y >= m_iHeight)
-			break;
+		
 		if (m_Board[down_y][_position.m_ix] == nullptr || m_Board[down_y][_position.m_ix]->getBlockType() != _type)
 			break;
 		++iCount;
@@ -819,83 +802,77 @@ void Board::BoomBlock()
 
 void Board::RemoveBlock()
 {
-	ClearArray();
 	while (!m_sRemoveBlock.empty())
 	{
-		Block* pRemoveBlock = m_sRemoveBlock.top();
+		Block* pRemoveBlock = m_sRemoveBlock.top();		// 삭제블록스택에서 하나를 꺼냄
+		m_sRemoveBlock.pop();
 
-		if (dynamic_cast<BlockWall*>(pRemoveBlock) != nullptr)
+		if (pRemoveBlock->GetBlockID() != BLOCK_ID::NORMAL_BLOCK)		// 일반블록이 아닌 경우
 		{
 			TEXTURE_TYPE WallType = dynamic_cast<BlockWall*>(pRemoveBlock)->BlockWall::GetWallType();
-			if (WallType == ICE_WALL)
+			if (WallType == ICE_WALL)	// 얼음벽인 경우
 			{
-				Vector2 pos = { pRemoveBlock->GetBoardPosition().m_iy ,pRemoveBlock->GetBoardPosition().m_ix };
-				
-				Block* newBlock = new Block();
-				SceneManager::GetInstance()->GetCurScene()->Scene::AddObject(newBlock, OBJECT_GROUP::BLOCK);
-				newBlock->Init(pos, (TEXTURE_TYPE)pRemoveBlock->getBlockType(), this, std::bind(&Board::BlockCheck, this, std::placeholders::_1));
-				m_vecSubBlock.push_back(newBlock);
-				++m_arrColumnCount[pRemoveBlock->GetBoardPosition().m_ix];
-				m_sRemoveBlock.pop();
-				pRemoveBlock->SetActivate(false);
+				Block* newBlock = m_sExtraBlock.top();	// 새로운 블럭을 꺼낸다
+				m_sExtraBlock.pop();					
+				m_sBlockPool.push(newBlock);			// 리스폰을 위해 Pool에 새로운 블럭을 넣는다
+				pRemoveBlock->SetActivate(false);		// 얼음벽블록이 일반블록으로 대체됐으므로 기존얼음벽은 비활성화
 			}
-			else
+			else  // 감옥벽인 경우
 			{
-				dynamic_cast<BlockWall*>(pRemoveBlock)->Reset((TEXTURE_TYPE)(rand() % ALL_NORMAL_BLOCKTYPE));
-				m_Board[pRemoveBlock->GetBoardPosition().m_iy][pRemoveBlock->GetBoardPosition().m_ix] = pRemoveBlock;
-				m_sRemoveBlock.pop();
+				dynamic_cast<BlockWall*>(pRemoveBlock)->Reset((TEXTURE_TYPE)(rand() % ALL_NORMAL_BLOCKTYPE));	// 내부 블럭만 교체
+				m_Board[pRemoveBlock->GetBoardPosition().m_iy][pRemoveBlock->GetBoardPosition().m_ix] = pRemoveBlock;	// 위치도 유지
 			}
 		}
-		else
+		else			 //일반블록인 경우
 		{
-			m_vecSubBlock.push_back(pRemoveBlock);
-			++m_arrColumnCount[pRemoveBlock->GetBoardPosition().m_ix];
-			m_sRemoveBlock.pop();
+			m_sBlockPool.push(pRemoveBlock);	// 리스폰을 위해 Pool에 넣는다
 		}
 
-		
-
-		if ((int)pRemoveBlock->getBlockType() < (int)ALL_NORMAL_BLOCKTYPE)
+		if ((int)pRemoveBlock->getBlockType() < (int)ALL_NORMAL_BLOCKTYPE)	// 삭제된 블록이 미션블록일 경우 처리
 			m_vecScoreBoard[(int)pRemoveBlock->getBlockType()].HitTarget();
 	}
-
 }
 
 void Board::SetNewBlock()
 {
 	for (int x = 0; x < m_iWidth; ++x)
 	{
-		int Count = 0;
-		int newY = m_iHeight - 1;
-
-		for (int y = m_iHeight - 1; y >= 0; --y)	//살아있는 블럭들 위치 세팅
+		int newY = m_iHeight - 1;	// 새로운 y포지션
+		// 남아있는 블럭들 위치세팅
+		for (int y = m_iHeight - 1; y >= 0; --y)	
 		{
 			if (m_Board[y][x] == nullptr || dynamic_cast<BlockWall*>(m_Board[y][x]) != nullptr) // 터졌거나 벽인 블럭은 패스
 				continue;
 			else
 			{
-				newY = FindNewPositionY(x, newY);
+				newY = FindNewPositionY(x, newY);	// 현재 열에서 (벽이 아니면서 빈 곳인)가장 아래 y값으로 새로운 위치 세팅
 				m_Board[newY][x] = m_Board[y][x];
 				m_Board[newY][x]->SetNewPosition({ x, newY });
 				--newY;
 			}
 		}
-		int newBlockCount = newY;
-		while (newY >= 0)						// 새로운 블럭들 위치 세팅
+
+		// 새로운 블럭들 위치 세팅
+		newY = FindNewPositionY(x, newY);
+		if (newY < 0)	// newY < 0이라면 현재열에는 삭제된 블럭이 없는것이므로 넘긴다
+			continue;
+
+		int newBlockCount = newY;	// 리스폰시작위치를 지정하기 위해 현재열에 생성될 블럭들의 수를 저장해둔다
+		while (newY >= 0)						
 		{
 			newY = FindNewPositionY(x, newY);
 			if (newY < 0)
 				break;;
 
 			Block* pSubBlock;
-			pSubBlock = m_vecSubBlock.back();	//넣은거 다시 빼서 랜덤으로 채우는 구조
+			pSubBlock = m_sBlockPool.top();	// 삭제할때 넣은거 다시 빼서 랜덤으로 리스폰시킨다
 			pSubBlock->Block::Reset({ x,0 }, (TEXTURE_TYPE)(rand() % ALL_NORMAL_BLOCKTYPE));
 			pSubBlock->SetNewPosition({ x,newY });
 			m_Board[newY][x] = pSubBlock;
-			m_Board[newY][x]->SetPosition({ x, newY - newBlockCount - 1 });
+			m_Board[newY][x]->SetPosition({ x, newY - newBlockCount - 1 });	// 리스폰위치 = 새로운 위치 - 같이 생성될 블럭 수 - 1로 하여 자연스럽게 블럭이 제자리로 떨어지게 한다
 			pSubBlock->SetActivate(true);
 			--newY;
-			m_vecSubBlock.pop_back();
+			m_sBlockPool.pop();
 		}
 	}
 

@@ -3,26 +3,11 @@
 C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\TimerManager.h(17,34): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   (소스 파일 'Block.cpp'을(를) 컴파일하는 중)
   
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Block.cpp(47,37): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Block.cpp(46,37): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
 C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Block.cpp(126,31): warning C5055: 연산자 '+': 열거형과 부동 소수점 형식 간에 사용되지 않음
 C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Block.cpp(126,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Block.cpp(127,31): warning C5055: 연산자 '+': 열거형과 부동 소수점 형식 간에 사용되지 않음
 C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Block.cpp(127,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Board.cpp
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\TimerManager.h(17,34): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'Board.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Board.cpp(65,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Board.cpp(66,29): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Board.cpp(67,31): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Board.cpp(319,106): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\Board.cpp(323,138): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GameScene.cpp
-C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\PangGame\TimerManager.h(17,34): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'GameScene.cpp'을(를) 컴파일하는 중)
-  
-  SceneManager.cpp
-  코드를 생성하고 있습니다...
   PangGame.vcxproj -> C:\Users\ysysy\Downloads\Match3GameMapTool\Match3Game\Build\Debug\PangGame.exe
   'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.

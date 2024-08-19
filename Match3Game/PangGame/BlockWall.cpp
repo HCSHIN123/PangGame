@@ -46,4 +46,5 @@ void BlockWall::InitWall(TEXTURE_TYPE _eWallTexture)
 {
 	m_eTextureType = _eWallTexture;
 	m_pWallTexture = ResourceManager::GetInstance()->LoadTexture(_eWallTexture);
+	SetBlockID(BLOCK_ID::WALL_BLOCK);
 }

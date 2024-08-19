@@ -12,7 +12,6 @@ Block::Block()
 {
 	m_rect = {};
 	m_bSelect = false;
-	//m_eBlockType = TEXTURE_TYPE::PIKACHU_BLOCK;
 	m_pBlockTexture = nullptr;
 	m_pSelectBlockTexture = nullptr;
 	m_fWeight = 0.0f;
@@ -56,6 +55,7 @@ void Block::Init(Vector2 _vec2Position, TEXTURE_TYPE _eTexture_Type, Board* _boa
 {
 	Reset(_vec2Position, _eTexture_Type, _CallBackFunction);
 	m_GameBoard = _board;
+	SetBlockID(BLOCK_ID::NORMAL_BLOCK);
 }
 
 void Block::InitAnimation()
@@ -199,10 +199,5 @@ void Block::Render(HDC _hDC)
 	else
 		TransparentBlt(_hDC, m_rect.left, m_rect.top, m_pBlockTexture->GetWidth(), m_pBlockTexture->GetHeight(), m_pBlockTexture->GetDC(),
 			0, 0, m_pBlockTexture->GetWidth(), m_pBlockTexture->GetHeight(), RGB(255, 0, 255));
-
-	/*if (m_pSelectBlockTexture != nullptr && m_bSelect == true)
-		BitBlt(_hDC, m_rect.left, m_rect.top, m_pSelectBlockTexture->GetWidth(), m_pSelectBlockTexture->GetHeight(), m_pSelectBlockTexture->GetDC(), 0, 0, SRCCOPY);
-	else
-		BitBlt(_hDC, m_rect.left, m_rect.top, m_pBlockTexture->GetWidth(), m_pBlockTexture->GetHeight(), m_pBlockTexture->GetDC(), 0, 0, SRCCOPY);*/
 }
 	

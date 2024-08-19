@@ -13,13 +13,7 @@ public:
 	virtual void Render(HDC _memDC) override;
 	virtual void Reset(TEXTURE_TYPE _newType);
 	TEXTURE_TYPE GetWallType() { return m_eTextureType; }
-	 /*TEXTURE_TYPE getBlockType()
-	{ 
-		if(m_pWallTexture != nullptr)
-			return m_eTextureType; 
-		else
-			return m_eBlockType; 
-	}*/
+	
 	void InitWall(TEXTURE_TYPE _eWallTexture);
 };
 

@@ -3,6 +3,12 @@
 #include"Object.h"
 #include"Animation.h"
 
+enum BLOCK_ID
+{
+	NORMAL_BLOCK,
+	WALL_BLOCK,
+};
+
 class Board;
 class Block : public Object
 {
@@ -23,6 +29,8 @@ protected:
 	Animation			m_Animation;
 	bool				m_bisBoom;
 
+	BLOCK_ID			m_eBlockID;
+
 	std::function<bool(Block*)> m_CallBackFunction;
 	
 public:
@@ -35,6 +43,8 @@ public:
 	void Reset(Vector2 _vec2Position, TEXTURE_TYPE _eTexture_Type);
 	void Reset(Vector2 _position, TEXTURE_TYPE _texture, std::function<bool(Block*)> _CallBackFunction);
 	
+	void SetBlockID(BLOCK_ID _id) { m_eBlockID = _id; }
+	BLOCK_ID GetBlockID() { return m_eBlockID; }
 
 	void SetPosition(Vector2 _vec2Position);
 	bool Check();

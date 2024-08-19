@@ -20,7 +20,6 @@ enum GAME_STATE
 	SETIING,
 	CHECKING,
 	WAITING,
-	CLEARING,
 };
 
 enum
@@ -66,9 +65,9 @@ private:
 
 	GAME_STATE m_eGameState;
 
-	std::vector<int> m_arrColumnCount;
-	std::stack<Block*> m_sRemoveBlock; // 매치가 성공된 블럭들 (후보블럭들을 출전시키고 후보블럭들 벡터로 편입)
-	std::vector<Block*> m_vecSubBlock; // 후보블럭들
+	std::stack<Block*> m_sRemoveBlock; // 매치가 성공된 블럭들 (해당 턴에 삭제될 블럭들)
+	std::stack<Block*> m_sBlockPool; // 블럭풀 ObjectPooling에 쓰임
+	std::stack<Block*> m_sExtraBlock;  // 블럭 여분 벽이 파괴되었을때 추가적으로 생성될 블럭들 여분
 	
 	std::vector<std::vector<Block*>> m_Board;
 	std::vector<int> m_vecStartPointY;
@@ -138,7 +137,6 @@ public:
 	int GetNextY(Vector2 _position);
 
 	void InitAllBoolean(){ m_bMatch_5 = false;m_bMatchCol_4 = false;m_bMatchRow_4 = false;m_bMatchCross = false; }
-	void ClearArray() { for (int i = 0; i < m_iWidth; ++i)m_arrColumnCount[i] = 0; }
 	void ClearStack() { while (!m_sRemoveBlock.empty()) { m_sRemoveBlock.pop(); } }
 
 	void RemoveRow(Vector2 _position);
