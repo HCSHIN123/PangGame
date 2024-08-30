@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Engine\01.Header">
+      <UniqueIdentifier>{c562f587-dd06-4f81-96d8-f798794bbebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\02.Core">
+      <UniqueIdentifier>{c6c237af-11dc-4e03-9900-64f0ab162525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager">
+      <UniqueIdentifier>{0b108868-2e6b-4f51-9ceb-e7e3c3a67266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager\PathManager">
+      <UniqueIdentifier>{8963996c-eb02-490c-9eb2-4a950a1cc4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager\ResourceManager">
+      <UniqueIdentifier>{93d09e44-c554-4246-954b-245da5e5147d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object">
+      <UniqueIdentifier>{2315f50f-6ee8-4d70-bc85-6ccfe6dd4e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05.Resource">
+      <UniqueIdentifier>{267fbe49-b07a-4d4b-a8fc-ecfb527cf01b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05.Resource\Texture">
+      <UniqueIdentifier>{2b62fa03-e8fe-4ad9-a0c9-ab6b216ebd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager\InputManager">
+      <UniqueIdentifier>{76923c84-8457-4240-9caa-380a2db6840b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06.Scene">
+      <UniqueIdentifier>{93ffa3c1-9557-4dd3-b487-fd3928fca789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager\SceneManager">
+      <UniqueIdentifier>{1a78b7ce-df89-42f1-8428-89c73d4f7c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager\TimeManager">
+      <UniqueIdentifier>{a8e15fbd-921f-450a-8631-8b1a13ac957d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06.Scene\MainScene">
+      <UniqueIdentifier>{886f14eb-1399-42bd-a307-40e4990df6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\Button">
+      <UniqueIdentifier>{8475ff4d-c023-4bd1-8bfc-1cc56f8b856a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\Block">
+      <UniqueIdentifier>{ff7d81c7-a7fc-45a2-8099-1769f15691ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\Board">
+      <UniqueIdentifier>{7849c3c8-d678-41dd-af9b-fc0be83c8967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\User">
+      <UniqueIdentifier>{15610bf6-523c-4d01-a3f5-b9630b4c0fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06.Scene\GameScene">
+      <UniqueIdentifier>{9044738b-a8fc-41ef-b66f-3480a89bdd51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Animation">
+      <UniqueIdentifier>{8c72a1c7-5cd7-4748-aa5a-323c22e12133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06.Scene\MapToolScene">
+      <UniqueIdentifier>{b8f20b8d-d09a-4f01-aaf5-6cf813d4ebae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\Block\BlockWall">
+      <UniqueIdentifier>{35159f89-3000-46de-9943-a76183a3625c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="PangGame.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Engine\02.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="const.h">
+      <Filter>Engine\01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Engine\01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>Engine\01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PathManager.h">
+      <Filter>Engine\03.Manager\PathManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\03.Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\05.Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameResource.h">
+      <Filter>Engine\05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\03.Manager\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\06.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine\03.Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Engine\03.Manager\TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Engine\04.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>Engine\06.Scene\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\04.Object\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Engine\06.Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Engine\04.Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Engine\04.Object\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Engine\User</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\07.Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Engine\06.Scene\MapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockWall.h">
+      <Filter>Engine\04.Object\Block\BlockWall</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PangGame.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="PangGame.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PangGame.cpp" />
+    <ClCompile Include="Core.cpp">
+      <Filter>Engine\02.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="PathManager.cpp">
+      <Filter>Engine\03.Manager\PathManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\03.Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Engine\05.Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameResource.cpp">
+      <Filter>Engine\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\03.Manager\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine\06.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\03.Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Engine\03.Manager\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Engine\04.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>Engine\06.Scene\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\04.Object\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Engine\06.Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Engine\04.Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Engine\04.Object\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Engine\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\07.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Engine\06.Scene\MapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockWall.cpp">
+      <Filter>Engine\04.Object\Block\BlockWall</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
