@@ -1,7 +1,7 @@
 # PangGame
 WinAPI로 만든 3매칭 게임이다. 디버그 모드로 실행시 맵툴기능도 실행가능.
 
-![053](https://github.com/user-attachments/assets/9b961622-a27b-421c-b87b-b54a1df7ea09)
+
 ![054](https://github.com/user-attachments/assets/327c2549-d052-4a27-a135-dacceb97adf7)
 ![055](https://github.com/user-attachments/assets/d158d773-7220-47e6-9a4c-c9ff66f57d7a)
 ![056](https://github.com/user-attachments/assets/faa30d46-da24-4165-816c-b7b0afae13db)
